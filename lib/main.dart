@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/screens/first_screen/first_screen.dart';
 
+import 'screens/news_display_screen/news_display_screen.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -26,7 +28,8 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const FirstScreen(),
+      // home: const FirstScreen(),
+      home: NewsDisplayScreen(),
     );
   }
 }
