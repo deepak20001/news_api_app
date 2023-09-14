@@ -17,13 +17,11 @@ class FetchNews {
       if (data["status"] != "ok") {
         throw "An unexpected error occured";
       }
-      var articles = data["articles"];
+      // var articles = data["articles"];
       Article article = Article.fromJson(data);
-      // print(article.articles[0].author);
 
       return article;
     } catch (e) {
-      print("No");
       throw e.toString();
     }
   }
