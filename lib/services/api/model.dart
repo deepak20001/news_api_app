@@ -52,7 +52,7 @@ class ArticleElement {
         description: json["description"] ?? "--",
         url: json["url"],
         urlToImage: json["urlToImage"] ??
-            "https://png.pngtree.com/element_our/20190601/ourmid/pngtree-web-ui-design-2-5d-icon-loading-ai-vector-png-free-image_1332562.jpg",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWrPAEh2XvPLLY8vqO_cA0RhBftWUTHIRoRQ",
         publishedAt: DateTime.parse(json["publishedAt"]),
         content: json["content"],
       );
