@@ -28,7 +28,6 @@ class Article {
 }
 
 class ArticleElement {
-  Source source;
   String? author;
   String? title;
   String? description;
@@ -38,7 +37,6 @@ class ArticleElement {
   String? content;
 
   ArticleElement({
-    required this.source,
     this.author,
     this.title,
     this.description,
@@ -49,7 +47,6 @@ class ArticleElement {
   });
 
   factory ArticleElement.fromJson(Map<String, dynamic> json) => ArticleElement(
-        source: Source.fromJson(json["source"]),
         author: json["author"] ?? "--",
         title: json["title"] ?? "--",
         description: json["description"] ?? "--",
@@ -61,7 +58,6 @@ class ArticleElement {
       );
 
   Map<String, dynamic> toJson() => {
-        "source": source.toJson(),
         "author": author,
         "title": title,
         "description": description,
@@ -69,25 +65,5 @@ class ArticleElement {
         "urlToImage": urlToImage,
         "publishedAt": publishedAt,
         "content": content,
-      };
-}
-
-class Source {
-  String? id;
-  String name;
-
-  Source({
-    required this.id,
-    required this.name,
-  });
-
-  factory Source.fromJson(Map<String, dynamic> json) => Source(
-        id: json["id"],
-        name: json["name"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
       };
 }

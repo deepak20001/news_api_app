@@ -15,10 +15,10 @@ class NewsDisplayScreen extends StatefulWidget {
 class _NewsDisplayScreenState extends State<NewsDisplayScreen> {
   late Article newsArt;
   final dateFormat = DateFormat('yyyy-MM-dd');
-  // FetchNews fn = FetchNews();
+  TextEditingController searchText = TextEditingController();
 
   getNews() async {
-    newsArt = await FetchNews.fetchNews();
+    newsArt = await FetchNews.indstance.fetchNews();
   }
 
   @override
@@ -31,7 +31,7 @@ class _NewsDisplayScreenState extends State<NewsDisplayScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder(
-        future: FetchNews.fetchNews(),
+        future: FetchNews.indstance.fetchNews(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -56,6 +56,7 @@ class _NewsDisplayScreenState extends State<NewsDisplayScreen> {
               child: Column(
                 children: [
                   TextField(
+                    controller: searchText,
                     decoration: InputDecoration(
                       enabledBorder: const UnderlineInputBorder(
                         borderSide:
@@ -63,7 +64,9 @@ class _NewsDisplayScreenState extends State<NewsDisplayScreen> {
                       ),
                       // focusedBorder: InputBorder.none,
                       suffixIcon: CupertinoButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          if (searchText.text.isNotEmpty) {}
+                        },
                         child: const Icon(
                           Icons.search,
                           color: Colors.blueGrey,
@@ -76,7 +79,7 @@ class _NewsDisplayScreenState extends State<NewsDisplayScreen> {
                   Expanded(
                     child: ListView.builder(
                       physics: const BouncingScrollPhysics(),
-                      itemCount: 20,
+                      itemCount: newsArt.articles.length,
                       shrinkWrap: true,
                       padding: const EdgeInsets.symmetric(vertical: 20),
                       itemBuilder: (context, index) {
@@ -87,23 +90,8 @@ class _NewsDisplayScreenState extends State<NewsDisplayScreen> {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (context) => DetailNewsView(
-                                    newsTitle: snapshot
-                                        .data!.articles[index].title
-                                        .toString(),
-                                    newsDetail: snapshot
-                                        .data!.articles[index].description
-                                        .toString(),
-                                    newsUploadedAt: snapshot
-                                        .data!.articles[index].publishedAt
-                                        .toString(),
-                                    authors: snapshot
-                                        .data!.articles[index].author
-                                        .toString(),
-                                    newsUrl: snapshot.data!.articles[index].url
-                                        .toString(),
-                                    newsImage: snapshot
-                                        .data!.articles[index].urlToImage
-                                        .toString(),
+                                    newsArt: newsArt,
+                                    index: index,
                                   ),
                                 ),
                               );
@@ -136,8 +124,7 @@ class _NewsDisplayScreenState extends State<NewsDisplayScreen> {
                                                   text: DateFormat('y-MM-dd')
                                                       .format(
                                                     DateTime.parse(
-                                                      dateFormat.format(snapshot
-                                                          .data!
+                                                      dateFormat.format(newsArt
                                                           .articles[index]
                                                           .publishedAt),
                                                     ),
@@ -152,7 +139,7 @@ class _NewsDisplayScreenState extends State<NewsDisplayScreen> {
                                                   child: SizedBox(width: 10),
                                                 ),
                                                 TextSpan(
-                                                  text: snapshot.data!
+                                                  text: newsArt
                                                       .articles[index].author,
                                                   style: const TextStyle(
                                                     fontSize: 13,
@@ -163,7 +150,7 @@ class _NewsDisplayScreenState extends State<NewsDisplayScreen> {
                                             ),
                                           ),
                                           Text(
-                                            snapshot.data!.articles[index].title
+                                            newsArt.articles[index].title
                                                 .toString(),
                                             style: const TextStyle(
                                               fontWeight: FontWeight.bold,
@@ -176,8 +163,7 @@ class _NewsDisplayScreenState extends State<NewsDisplayScreen> {
                                             height: 10,
                                           ),
                                           Text(
-                                            snapshot.data!.articles[index]
-                                                .description
+                                            newsArt.articles[index].description
                                                 .toString(),
                                             style: const TextStyle(
                                               fontSize: 14,
@@ -193,8 +179,7 @@ class _NewsDisplayScreenState extends State<NewsDisplayScreen> {
                                       child: Container(
                                         padding: const EdgeInsets.all(10),
                                         child: Image.network(
-                                          snapshot
-                                              .data!.articles[index].urlToImage
+                                          newsArt.articles[index].urlToImage
                                               .toString(),
                                           fit: BoxFit.fitHeight,
                                           height: 100,

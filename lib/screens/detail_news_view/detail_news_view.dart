@@ -3,23 +3,16 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../services/api/model.dart';
 
 class DetailNewsView extends StatefulWidget {
-  final String newsTitle;
-  final String newsDetail;
-  final String newsUploadedAt;
-  final String authors;
-  final String newsUrl;
-  final String newsImage;
+  final Article newsArt;
+  final int index;
 
   const DetailNewsView({
     Key? key,
-    required this.newsTitle,
-    required this.newsDetail,
-    required this.newsUploadedAt,
-    required this.authors,
-    required this.newsUrl,
-    required this.newsImage,
+    required this.newsArt,
+    required this.index,
   }) : super(key: key);
 
   @override
@@ -29,6 +22,7 @@ class DetailNewsView extends StatefulWidget {
 class _DetailNewsViewState extends State<DetailNewsView> {
   @override
   Widget build(BuildContext context) {
+    // return Scaffold();
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: kToolbarHeight * 0.2,
@@ -36,7 +30,7 @@ class _DetailNewsViewState extends State<DetailNewsView> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          final link = widget.newsUrl;
+          final link = widget.newsArt.articles[widget.index].url;
           launchUrl(
             Uri.parse(link),
             mode: LaunchMode.inAppWebView,
@@ -54,7 +48,7 @@ class _DetailNewsViewState extends State<DetailNewsView> {
             children: <Widget>[
               Center(
                 child: Text(
-                  widget.newsTitle,
+                  widget.newsArt.articles[widget.index].title!,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
@@ -73,7 +67,7 @@ class _DetailNewsViewState extends State<DetailNewsView> {
                       value: progress.progress,
                     ),
                   ),
-                  imageUrl: widget.newsImage,
+                  imageUrl: widget.newsArt.articles[widget.index].urlToImage!,
                   height: 250,
                 ),
               ),
@@ -87,7 +81,10 @@ class _DetailNewsViewState extends State<DetailNewsView> {
                   children: [
                     TextSpan(
                       text: DateFormat('y-MM-dd').format(
-                        DateTime.parse(widget.newsUploadedAt),
+                        DateTime.parse(
+                          widget.newsArt.articles[widget.index].publishedAt
+                              .toString(),
+                        ),
                       ),
                       style: TextStyle(
                         fontSize: 10,
@@ -98,7 +95,7 @@ class _DetailNewsViewState extends State<DetailNewsView> {
                       child: SizedBox(width: 10),
                     ),
                     TextSpan(
-                      text: widget.authors,
+                      text: widget.newsArt.articles[widget.index].author,
                       style: const TextStyle(
                         fontSize: 13,
                         color: Colors.blueGrey,
@@ -108,7 +105,7 @@ class _DetailNewsViewState extends State<DetailNewsView> {
                 ),
               ),
               Text(
-                widget.newsDetail,
+                widget.newsArt.articles[widget.index].content!,
                 style: TextStyle(
                   fontSize: 14,
                   color: Colors.blueGrey.shade500,
