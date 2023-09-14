@@ -22,7 +22,6 @@ class DetailNewsView extends StatefulWidget {
 class _DetailNewsViewState extends State<DetailNewsView> {
   @override
   Widget build(BuildContext context) {
-    // return Scaffold();
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: kToolbarHeight * 0.2,
@@ -37,6 +36,7 @@ class _DetailNewsViewState extends State<DetailNewsView> {
           );
         },
         backgroundColor: Colors.blueGrey.shade300,
+        splashColor: Colors.blueGrey.shade200,
         child: const Icon(Icons.turn_right),
       ),
       body: SingleChildScrollView(
