@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:news_app/screens/detail_news_view/detail_news_view.dart';
 import 'package:news_app/services/api/fetch_news_api.dart';
 import 'package:intl/intl.dart';
+import 'package:news_app/services/auth_service/auth_service.dart';
 
 class NewsDisplayScreen extends StatefulWidget {
   const NewsDisplayScreen({super.key});
@@ -20,6 +21,8 @@ class _NewsDisplayScreenState extends State<NewsDisplayScreen> {
 
   @override
   Widget build(BuildContext context) {
+    AuthService authService = AuthService();
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -59,19 +62,27 @@ class _NewsDisplayScreenState extends State<NewsDisplayScreen> {
                   .copyWith(top: 50.0),
               child: Column(
                 children: [
-                  TextField(
-                    controller: searchText,
-                    onSubmitted: (value) {
-                      searchedWord = searchText.text;
-                      fNews.searchNews(searchedWord);
-                      setState(() {});
-                    },
-                    decoration: InputDecoration(
-                      enabledBorder: const UnderlineInputBorder(
-                        borderSide:
-                            BorderSide(width: 2, color: Colors.blueGrey),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          controller: searchText,
+                          onSubmitted: (value) {
+                            searchedWord = searchText.text;
+                            fNews.searchNews(searchedWord);
+                            setState(() {});
+                          },
+                          decoration: const InputDecoration(
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide:
+                                  BorderSide(width: 2, color: Colors.blueGrey),
+                            ),
+                            hintText: "Search news headlines",
+                          ),
+                          style: const TextStyle(color: Colors.blueGrey),
+                        ),
                       ),
-                      suffixIcon: CupertinoButton(
+                      CupertinoButton(
                         onPressed: () {
                           if (searchText.text.isNotEmpty) {
                             searchedWord = searchText.text;
@@ -86,9 +97,16 @@ class _NewsDisplayScreenState extends State<NewsDisplayScreen> {
                           color: Colors.blueGrey,
                         ),
                       ),
-                      hintText: "Search news headlines",
-                    ),
-                    style: const TextStyle(color: Colors.blueGrey),
+                      CupertinoButton(
+                        onPressed: () {
+                          authService.handleSignOut();
+                        },
+                        child: Icon(
+                          Icons.logout,
+                          color: Colors.red.shade800,
+                        ),
+                      ),
+                    ],
                   ),
                   Expanded(
                     child: ListView.builder(
