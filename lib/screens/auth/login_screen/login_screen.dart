@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:news_app/services/auth_service/auth_service.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -19,6 +20,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    AuthService authService = AuthService();
     return Column(
       children: [
         Container(
@@ -110,15 +112,27 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 const Align(
-                    alignment: Alignment.center, child: Text("Login with")),
+                  alignment: Alignment.center,
+                  child: Text("Login with"),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
                 Align(
                   alignment: Alignment.center,
                   child: CupertinoButton(
+                    onPressed: () {
+                      authService.signInWithGoogle();
+                    },
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 30,
+                      vertical: 10,
+                    ),
+                    color: Colors.blueGrey.shade200,
                     child: Image.asset(
                       "assets/icons/google.png",
                       width: 30,
                     ),
-                    onPressed: () {},
                   ),
                 ),
                 Row(
