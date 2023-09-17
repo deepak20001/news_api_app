@@ -12,6 +12,10 @@ class _SignUpState extends State<SignUp> {
   String dropDownValue = "+91";
   late bool hidepassword;
   bool isChecked = false;
+  TextEditingController name = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController phoneNo = TextEditingController();
+  TextEditingController password = TextEditingController();
 
   @override
   void initState() {
@@ -55,8 +59,9 @@ class _SignUpState extends State<SignUp> {
                     color: Colors.black,
                   ),
                 ),
-                const TextField(
-                  decoration: InputDecoration(
+                TextFormField(
+                  controller: name,
+                  decoration: const InputDecoration(
                     enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(width: 1, color: Colors.blueGrey),
                     ),
@@ -67,7 +72,7 @@ class _SignUpState extends State<SignUp> {
                     ),
                     hintText: "John Wick",
                   ),
-                  style: TextStyle(color: Colors.blueGrey),
+                  style: const TextStyle(color: Colors.blueGrey),
                 ),
                 const SizedBox(height: 10),
                 const Text(
@@ -78,8 +83,10 @@ class _SignUpState extends State<SignUp> {
                     color: Colors.black,
                   ),
                 ),
-                const TextField(
-                  decoration: InputDecoration(
+                TextFormField(
+                  controller: email,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: const InputDecoration(
                     enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(width: 1, color: Colors.blueGrey),
                     ),
@@ -90,7 +97,7 @@ class _SignUpState extends State<SignUp> {
                     ),
                     hintText: "wick@gmail.com",
                   ),
-                  style: TextStyle(color: Colors.blueGrey),
+                  style: const TextStyle(color: Colors.blueGrey),
                 ),
                 const SizedBox(height: 10),
                 const Text(
@@ -134,9 +141,10 @@ class _SignUpState extends State<SignUp> {
                     const SizedBox(width: 10),
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.43,
-                      child: const TextField(
+                      child: TextFormField(
+                        controller: phoneNo,
                         keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           enabledBorder: UnderlineInputBorder(
                             borderSide:
                                 BorderSide(width: 1, color: Colors.blueGrey),
@@ -148,7 +156,7 @@ class _SignUpState extends State<SignUp> {
                           ),
                           hintText: "9876543210",
                         ),
-                        style: TextStyle(color: Colors.blueGrey),
+                        style: const TextStyle(color: Colors.blueGrey),
                       ),
                     ),
                   ],
@@ -162,7 +170,9 @@ class _SignUpState extends State<SignUp> {
                     color: Colors.black,
                   ),
                 ),
-                TextField(
+                TextFormField(
+                  controller: password,
+                  keyboardType: TextInputType.visiblePassword,
                   obscureText: hidepassword,
                   decoration: InputDecoration(
                     enabledBorder: const UnderlineInputBorder(
@@ -244,6 +254,28 @@ class _SignUpState extends State<SignUp> {
                   ],
                 )
               ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 18),
+        GestureDetector(
+          onTap: () {},
+          child: Container(
+            padding: const EdgeInsets.fromLTRB(180, 25, 0, 0),
+            height: 60,
+            width: MediaQuery.of(context).size.width,
+            decoration: const BoxDecoration(
+              color: Colors.blueGrey,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(42),
+                topRight: Radius.circular(42),
+              ),
+            ),
+            child: const Text(
+              "SIGN UP",
+              style: TextStyle(
+                color: Colors.white,
+              ),
             ),
           ),
         ),

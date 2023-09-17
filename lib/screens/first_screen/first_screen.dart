@@ -106,28 +106,7 @@ class _FirstScreenState extends State<FirstScreen> {
               height: MediaQuery.of(context).size.height * 0.02,
             ),
             index == 0 ? const LoginScreen() : const SignUp(),
-            const SizedBox(height: 18),
-            GestureDetector(
-              onTap: () {},
-              child: Container(
-                padding: const EdgeInsets.fromLTRB(180, 25, 0, 0),
-                height: 60,
-                width: MediaQuery.of(context).size.width,
-                decoration: const BoxDecoration(
-                  color: Colors.blueGrey,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(42),
-                    topRight: Radius.circular(42),
-                  ),
-                ),
-                child: Text(
-                  index == 0 ? "LOGIN" : "SIGN UP",
-                  style: const TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
+            ///
           ],
         ),
       ),

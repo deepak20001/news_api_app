@@ -11,6 +11,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   late bool hidepassword;
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
 
   @override
   void initState() {
@@ -55,8 +57,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     color: Colors.black,
                   ),
                 ),
-                const TextField(
-                  decoration: InputDecoration(
+                TextField(
+                  controller: email,
+                  decoration: const InputDecoration(
                     enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(width: 1, color: Colors.blueGrey),
                     ),
@@ -67,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     hintText: "wick@gmail.com",
                   ),
-                  style: TextStyle(color: Colors.blueGrey),
+                  style: const TextStyle(color: Colors.blueGrey),
                 ),
                 const SizedBox(height: 10),
                 const Text(
@@ -79,6 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 TextField(
+                  controller: password,
                   obscureText: hidepassword,
                   decoration: InputDecoration(
                     enabledBorder: const UnderlineInputBorder(
@@ -124,7 +128,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: () {
                       authService.signInWithGoogle();
                     },
-                    padding: EdgeInsets.symmetric(
+                    padding: const EdgeInsets.symmetric(
                       horizontal: 30,
                       vertical: 10,
                     ),
@@ -149,6 +153,28 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 )
               ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 18),
+        GestureDetector(
+          onTap: () {},
+          child: Container(
+            padding: const EdgeInsets.fromLTRB(180, 25, 0, 0),
+            height: 60,
+            width: MediaQuery.of(context).size.width,
+            decoration: const BoxDecoration(
+              color: Colors.blueGrey,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(42),
+                topRight: Radius.circular(42),
+              ),
+            ),
+            child: const Text(
+              "LOGIN",
+              style: TextStyle(
+                color: Colors.white,
+              ),
             ),
           ),
         ),
