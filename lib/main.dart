@@ -1,10 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:news_app/screens/first_screen/first_screen.dart';
-import 'screens/news_display_screen/news_display_screen.dart';
+import 'package:news_app/screens/auth/auth_screen.dart/auth_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   CachedNetworkImage.logLevel = CacheManagerLogLevel.debug;
+
   runApp(const MyApp());
 }
 
@@ -29,8 +33,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      // home: const FirstScreen(),
-      home: NewsDisplayScreen(),
+      home: const AuthPage(),
     );
   }
 }
