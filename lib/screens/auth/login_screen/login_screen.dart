@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:news_app/constants/constants.dart';
-import 'package:news_app/screens/auth/signup_screen/signup_screen.dart';
 import 'package:news_app/screens/first_screen/first_screen.dart';
+import 'package:news_app/screens/news_display_screen/news_display_screen.dart';
 import 'package:news_app/services/auth_service/auth_service.dart';
+
+import '../forgot_password_screen/forgot_password_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -112,7 +113,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const ForgotPasswordScreen(),
+                        ),
+                      );
+                    },
                     child: const Text(
                       "Forgot Password ?",
                       selectionColor: Colors.blueGrey,
@@ -169,10 +176,16 @@ class _LoginScreenState extends State<LoginScreen> {
         const SizedBox(height: 18),
         GestureDetector(
           onTap: () {
-            bool isValidate = loginValidation(email.text, password.text);
-            if (isValidate == true) {
-              authService.signInWithEmail(email.text, password.text);
-            }
+            // bool isValidate = loginValidation(email.text, password.text);
+            // if (isValidate == true) {
+            authService.signInWithEmail(email.text, password.text).then(
+                  (value) => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const NewsDisplayScreen(),
+                    ),
+                  ),
+                );
+            // }
           },
           child: Container(
             padding: const EdgeInsets.fromLTRB(180, 25, 0, 0),

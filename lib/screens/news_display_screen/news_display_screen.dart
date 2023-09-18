@@ -5,6 +5,8 @@ import 'package:news_app/services/api/fetch_news_api.dart';
 import 'package:intl/intl.dart';
 import 'package:news_app/services/auth_service/auth_service.dart';
 
+import '../first_screen/first_screen.dart';
+
 class NewsDisplayScreen extends StatefulWidget {
   const NewsDisplayScreen({super.key});
 
@@ -99,7 +101,13 @@ class _NewsDisplayScreenState extends State<NewsDisplayScreen> {
                       ),
                       CupertinoButton(
                         onPressed: () {
-                          authService.handleSignOut();
+                          authService.handleSignOut().then(
+                                (value) => Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => FirstScreen(index: 0),
+                                  ),
+                                ),
+                              );
                         },
                         child: Icon(
                           Icons.logout,

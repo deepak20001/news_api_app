@@ -267,7 +267,13 @@ class _SignUpState extends State<SignUp> {
             bool isValidate = signUpValidation(
                 email.text, password.text, name.text, phoneNo.text, isChecked);
             if (isValidate == true) {
-              authService.signUpWithEmail(email.text, password.text);
+              authService.signUpWithEmail(email.text, password.text).then(
+                    (value) => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => FirstScreen(index: 0),
+                      ),
+                    ),
+                  );
             }
           },
           child: Container(
