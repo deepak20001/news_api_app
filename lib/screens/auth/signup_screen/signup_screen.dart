@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/services/auth_service/auth_service.dart';
 import '../../../constants/constants.dart';
+import '../../first_screen/first_screen.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -199,15 +200,8 @@ class _SignUpState extends State<SignUp> {
                   ),
                   style: const TextStyle(color: Colors.blueGrey),
                 ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      "Forgot Password ?",
-                      selectionColor: Colors.blueGrey,
-                    ),
-                  ),
+                const SizedBox(
+                  height: 15,
                 ),
                 Row(
                   children: [
@@ -249,7 +243,13 @@ class _SignUpState extends State<SignUp> {
                   children: [
                     const Text("Already have an Account ?"),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) => FirstScreen(index: 0),
+                          ),
+                        );
+                      },
                       child: const Text(
                         "Sign In",
                         selectionColor: Colors.blueGrey,

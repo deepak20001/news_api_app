@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/constants/constants.dart';
 import 'package:news_app/screens/auth/signup_screen/signup_screen.dart';
+import 'package:news_app/screens/first_screen/first_screen.dart';
 import 'package:news_app/services/auth_service/auth_service.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -148,11 +149,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     const Text("Don't have an Account ?"),
                     TextButton(
                       onPressed: () {
-                        // Navigator.of(context).push(
-                        //   MaterialPageRoute(
-                        //     builder: (context) => const SignUp(),
-                        //   ),
-                        // );
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) => FirstScreen(index: 1),
+                          ),
+                        );
                       },
                       child: const Text(
                         "Register Now",
