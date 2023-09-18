@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/services/auth_service/auth_service.dart';
 import '../../../constants/constants.dart';
+import '../../../constants/routes.dart';
 import '../../first_screen/first_screen.dart';
 
 class SignUp extends StatefulWidget {
@@ -244,11 +245,9 @@ class _SignUpState extends State<SignUp> {
                     const Text("Already have an Account ?"),
                     TextButton(
                       onPressed: () {
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(
-                            builder: (context) => FirstScreen(index: 0),
-                          ),
-                        );
+                        Routes.instance.push(
+                          widget:  FirstScreen(index: 0),
+                          context: context);
                       },
                       child: const Text(
                         "Sign In",
@@ -267,13 +266,7 @@ class _SignUpState extends State<SignUp> {
             bool isValidate = signUpValidation(
                 email.text, password.text, name.text, phoneNo.text, isChecked);
             if (isValidate == true) {
-              authService.signUpWithEmail(email.text, password.text).then(
-                    (value) => Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => FirstScreen(index: 0),
-                      ),
-                    ),
-                  );
+              authService.signUpWithEmail(email.text, password.text);
             }
           },
           child: Container(

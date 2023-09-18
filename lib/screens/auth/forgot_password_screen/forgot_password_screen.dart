@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:news_app/screens/first_screen/first_screen.dart';
 
+import '../../../constants/routes.dart';
 import '../../../services/auth_service/auth_service.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
@@ -53,7 +55,10 @@ class ForgotPasswordScreen extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   String passwordResetEmail = email.text.trim();
-                  authService.forgotPassword(passwordResetEmail, context);
+                  authService.forgotPassword(passwordResetEmail).then(
+                        (value) => Routes.instance.push(
+                            widget: FirstScreen(index: 0), context: context),
+                      );
                 },
                 child: const Text("Forgot Password"),
               ),

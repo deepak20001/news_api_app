@@ -36,7 +36,7 @@ String getMessageFromErrorCode(String errorCode) {
         return "There was a network error.";
       }
     default:
-      return "An unknown error occurred.";
+      return errorCode;
   }
 }
 

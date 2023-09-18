@@ -22,7 +22,7 @@ class AuthPage extends StatelessWidget {
           if (snapshot.hasData) {
             return const NewsDisplayScreen();
           } else {
-            return  FirstScreen();
+            return FirstScreen();
           }
         },
       ),

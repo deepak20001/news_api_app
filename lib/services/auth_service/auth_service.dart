@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../constants/constants.dart';
-import '../../screens/first_screen/first_screen.dart';
 
 class AuthService {
   // AuthService._();
@@ -74,27 +73,19 @@ class AuthService {
     }
   }
 
-  Future<void> forgotPassword(String email, BuildContext context) async {
+  Future<bool> forgotPassword(String email) async {
     try {
-      await FirebaseAuth.instance
-          .sendPasswordResetEmail(email: email)
-          .then((value) {
-        showMessage(
-          "Password reset mail sent successfully",
-          Colors.green,
-        );
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => FirstScreen(index: 1),
-          ),
-        );
-      });
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      showMessage("Password reset e-mail sent", Colors.green);
+
+      return true;
     } catch (e) {
       showMessage(
           getMessageFromErrorCode(
             e.toString(),
           ),
           Colors.red);
+      return false;
     }
   }
 }

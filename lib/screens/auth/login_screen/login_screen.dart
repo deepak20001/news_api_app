@@ -4,6 +4,7 @@ import 'package:news_app/screens/first_screen/first_screen.dart';
 import 'package:news_app/screens/news_display_screen/news_display_screen.dart';
 import 'package:news_app/services/auth_service/auth_service.dart';
 
+import '../../../constants/routes.dart';
 import '../forgot_password_screen/forgot_password_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -114,11 +115,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   alignment: Alignment.centerRight,
                   child: TextButton(
                     onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const ForgotPasswordScreen(),
-                        ),
-                      );
+                      Routes.instance.push(
+                          widget: const ForgotPasswordScreen(),
+                          context: context);
                     },
                     child: const Text(
                       "Forgot Password ?",
@@ -156,11 +155,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     const Text("Don't have an Account ?"),
                     TextButton(
                       onPressed: () {
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(
-                            builder: (context) => FirstScreen(index: 1),
-                          ),
-                        );
+                        Routes.instance.push(
+                            widget: FirstScreen(index: 1), context: context);
                       },
                       child: const Text(
                         "Register Now",
@@ -178,14 +174,7 @@ class _LoginScreenState extends State<LoginScreen> {
           onTap: () {
             // bool isValidate = loginValidation(email.text, password.text);
             // if (isValidate == true) {
-            authService.signInWithEmail(email.text, password.text).then(
-                  (value) => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const NewsDisplayScreen(),
-                    ),
-                  ),
-                );
-            // }
+            authService.signInWithEmail(email.text, password.text);
           },
           child: Container(
             padding: const EdgeInsets.fromLTRB(180, 25, 0, 0),
