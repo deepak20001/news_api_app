@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:news_app/constants/constants.dart';
+import 'package:news_app/screens/auth/signup_screen/signup_screen.dart';
+import 'package:news_app/screens/first_screen/first_screen.dart';
 import 'package:news_app/services/auth_service/auth_service.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -11,6 +14,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   late bool hidepassword;
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
 
   @override
   void initState() {
@@ -55,8 +60,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     color: Colors.black,
                   ),
                 ),
-                const TextField(
-                  decoration: InputDecoration(
+                TextField(
+                  controller: email,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: const InputDecoration(
                     enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(width: 1, color: Colors.blueGrey),
                     ),
@@ -67,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     hintText: "wick@gmail.com",
                   ),
-                  style: TextStyle(color: Colors.blueGrey),
+                  style: const TextStyle(color: Colors.blueGrey),
                 ),
                 const SizedBox(height: 10),
                 const Text(
@@ -79,6 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 TextField(
+                  controller: password,
                   obscureText: hidepassword,
                   decoration: InputDecoration(
                     enabledBorder: const UnderlineInputBorder(
@@ -124,7 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: () {
                       authService.signInWithGoogle();
                     },
-                    padding: EdgeInsets.symmetric(
+                    padding: const EdgeInsets.symmetric(
                       horizontal: 30,
                       vertical: 10,
                     ),
@@ -140,7 +148,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     const Text("Don't have an Account ?"),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) => FirstScreen(index: 1),
+                          ),
+                        );
+                      },
                       child: const Text(
                         "Register Now",
                         selectionColor: Colors.blueGrey,
@@ -149,6 +163,33 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 )
               ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 18),
+        GestureDetector(
+          onTap: () {
+            bool isValidate = loginValidation(email.text, password.text);
+            if (isValidate == true) {
+              authService.signInWithEmail(email.text, password.text);
+            }
+          },
+          child: Container(
+            padding: const EdgeInsets.fromLTRB(180, 25, 0, 0),
+            height: 60,
+            width: MediaQuery.of(context).size.width,
+            decoration: const BoxDecoration(
+              color: Colors.blueGrey,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(42),
+                topRight: Radius.circular(42),
+              ),
+            ),
+            child: const Text(
+              "LOGIN",
+              style: TextStyle(
+                color: Colors.white,
+              ),
             ),
           ),
         ),

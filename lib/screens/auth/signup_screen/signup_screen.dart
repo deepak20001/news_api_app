@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:news_app/services/auth_service/auth_service.dart';
+import '../../../constants/constants.dart';
+import '../../first_screen/first_screen.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -12,6 +15,10 @@ class _SignUpState extends State<SignUp> {
   String dropDownValue = "+91";
   late bool hidepassword;
   bool isChecked = false;
+  TextEditingController name = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController phoneNo = TextEditingController();
+  TextEditingController password = TextEditingController();
 
   @override
   void initState() {
@@ -21,6 +28,8 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
+    AuthService authService = AuthService();
+
     return Column(
       children: [
         Container(
@@ -55,8 +64,9 @@ class _SignUpState extends State<SignUp> {
                     color: Colors.black,
                   ),
                 ),
-                const TextField(
-                  decoration: InputDecoration(
+                TextFormField(
+                  controller: name,
+                  decoration: const InputDecoration(
                     enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(width: 1, color: Colors.blueGrey),
                     ),
@@ -67,7 +77,7 @@ class _SignUpState extends State<SignUp> {
                     ),
                     hintText: "John Wick",
                   ),
-                  style: TextStyle(color: Colors.blueGrey),
+                  style: const TextStyle(color: Colors.blueGrey),
                 ),
                 const SizedBox(height: 10),
                 const Text(
@@ -78,8 +88,10 @@ class _SignUpState extends State<SignUp> {
                     color: Colors.black,
                   ),
                 ),
-                const TextField(
-                  decoration: InputDecoration(
+                TextFormField(
+                  controller: email,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: const InputDecoration(
                     enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(width: 1, color: Colors.blueGrey),
                     ),
@@ -90,7 +102,7 @@ class _SignUpState extends State<SignUp> {
                     ),
                     hintText: "wick@gmail.com",
                   ),
-                  style: TextStyle(color: Colors.blueGrey),
+                  style: const TextStyle(color: Colors.blueGrey),
                 ),
                 const SizedBox(height: 10),
                 const Text(
@@ -134,9 +146,10 @@ class _SignUpState extends State<SignUp> {
                     const SizedBox(width: 10),
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.43,
-                      child: const TextField(
+                      child: TextFormField(
+                        controller: phoneNo,
                         keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           enabledBorder: UnderlineInputBorder(
                             borderSide:
                                 BorderSide(width: 1, color: Colors.blueGrey),
@@ -148,7 +161,7 @@ class _SignUpState extends State<SignUp> {
                           ),
                           hintText: "9876543210",
                         ),
-                        style: TextStyle(color: Colors.blueGrey),
+                        style: const TextStyle(color: Colors.blueGrey),
                       ),
                     ),
                   ],
@@ -162,7 +175,9 @@ class _SignUpState extends State<SignUp> {
                     color: Colors.black,
                   ),
                 ),
-                TextField(
+                TextFormField(
+                  controller: password,
+                  keyboardType: TextInputType.visiblePassword,
                   obscureText: hidepassword,
                   decoration: InputDecoration(
                     enabledBorder: const UnderlineInputBorder(
@@ -185,15 +200,8 @@ class _SignUpState extends State<SignUp> {
                   ),
                   style: const TextStyle(color: Colors.blueGrey),
                 ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      "Forgot Password ?",
-                      selectionColor: Colors.blueGrey,
-                    ),
-                  ),
+                const SizedBox(
+                  height: 15,
                 ),
                 Row(
                   children: [
@@ -235,7 +243,13 @@ class _SignUpState extends State<SignUp> {
                   children: [
                     const Text("Already have an Account ?"),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) => FirstScreen(index: 0),
+                          ),
+                        );
+                      },
                       child: const Text(
                         "Sign In",
                         selectionColor: Colors.blueGrey,
@@ -244,6 +258,34 @@ class _SignUpState extends State<SignUp> {
                   ],
                 )
               ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 18),
+        GestureDetector(
+          onTap: () async {
+            bool isValidate = signUpValidation(
+                email.text, password.text, name.text, phoneNo.text, isChecked);
+            if (isValidate == true) {
+              authService.signUpWithEmail(email.text, password.text);
+            }
+          },
+          child: Container(
+            padding: const EdgeInsets.fromLTRB(180, 25, 0, 0),
+            height: 60,
+            width: MediaQuery.of(context).size.width,
+            decoration: const BoxDecoration(
+              color: Colors.blueGrey,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(42),
+                topRight: Radius.circular(42),
+              ),
+            ),
+            child: const Text(
+              "SIGN UP",
+              style: TextStyle(
+                color: Colors.white,
+              ),
             ),
           ),
         ),
