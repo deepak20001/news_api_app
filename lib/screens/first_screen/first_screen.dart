@@ -106,6 +106,7 @@ class _FirstScreenState extends State<FirstScreen> {
               height: MediaQuery.of(context).size.height * 0.02,
             ),
             index == 0 ? const LoginScreen() : const SignUp(),
+
             ///
           ],
         ),

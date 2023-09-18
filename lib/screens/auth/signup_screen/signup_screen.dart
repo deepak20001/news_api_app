@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:news_app/services/auth_service/auth_service.dart';
+import '../../../constants/constants.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -25,6 +27,8 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
+    AuthService authService = AuthService();
+
     return Column(
       children: [
         Container(
@@ -259,7 +263,13 @@ class _SignUpState extends State<SignUp> {
         ),
         const SizedBox(height: 18),
         GestureDetector(
-          onTap: () {},
+          onTap: () async {
+            bool isValidate = signUpValidation(
+                email.text, password.text, name.text, phoneNo.text, isChecked);
+            if (isValidate == true) {
+              authService.signUpWithEmail(email.text, password.text);
+            }
+          },
           child: Container(
             padding: const EdgeInsets.fromLTRB(180, 25, 0, 0),
             height: 60,
