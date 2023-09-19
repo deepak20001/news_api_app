@@ -18,7 +18,6 @@ The Simple News App is your gateway to staying informed and up-to-date with the 
   <img src="https://github.com/deepak20001/news_api_app/assets/88405430/d98653e1-d7c7-44ab-b41e-5d5bf2ee60f3"  width="200">  
 </p>
 
-<br>
 ## Features
 - <b>Effortless User Authentication:</b> Enjoy secure access to the app through seamless email and Google sign-in options.
 - <b>Password Recovery:</b> Regain access to your account with ease by resetting your password via email.
