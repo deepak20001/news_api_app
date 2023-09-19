@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/screens/first_screen/first_screen.dart';
-import 'package:news_app/screens/news_display_screen/news_display_screen.dart';
 import 'package:news_app/services/auth_service/auth_service.dart';
-
 import '../../../constants/routes.dart';
 import '../forgot_password_screen/forgot_password_screen.dart';
 
@@ -172,8 +170,6 @@ class _LoginScreenState extends State<LoginScreen> {
         const SizedBox(height: 18),
         GestureDetector(
           onTap: () {
-            // bool isValidate = loginValidation(email.text, password.text);
-            // if (isValidate == true) {
             authService.signInWithEmail(email.text, password.text);
           },
           child: Container(

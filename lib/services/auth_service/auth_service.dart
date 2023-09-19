@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:news_app/screens/first_screen/first_screen.dart';
 
 import '../../constants/constants.dart';
+import '../../constants/routes.dart';
 
 class AuthService {
   // AuthService._();
@@ -73,10 +75,12 @@ class AuthService {
     }
   }
 
-  Future<bool> forgotPassword(String email) async {
+  Future<bool> forgotPassword(String email, BuildContext context) async {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
       showMessage("Password reset e-mail sent", Colors.green);
+      // ignore: use_build_context_synchronously
+      Routes.instance.push(widget: FirstScreen(index: 0), context: context);
 
       return true;
     } catch (e) {

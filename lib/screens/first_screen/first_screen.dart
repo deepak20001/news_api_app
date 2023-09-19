@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:news_app/screens/auth/login_screen/login_screen.dart';
 import 'package:news_app/screens/auth/signup_screen/signup_screen.dart';
 
+// ignore: must_be_immutable
 class FirstScreen extends StatefulWidget {
   int index;
   FirstScreen({super.key, this.index = 0});
