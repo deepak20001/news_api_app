@@ -2,6 +2,7 @@
 The Simple News App is your gateway to staying informed and up-to-date with the latest news. This mobile application, powered by the versatile Flutter framework, empowers users to read news articles and seamlessly search for the information they need. Built for both iOS and Android, it ensures a high-performance, cross-platform news consumption experience.
 <br>
 
+
 <p float="left">
   <img src="https://github.com/deepak20001/news_api_app/assets/88405430/30e4e88f-da5c-4572-b4e9-a5f3e29b7bc5"  width="200">
   &nbsp;&nbsp;&nbsp;&nbsp;
@@ -9,6 +10,8 @@ The Simple News App is your gateway to staying informed and up-to-date with the 
   &nbsp;&nbsp;&nbsp;&nbsp;
   <img src="https://github.com/deepak20001/news_api_app/assets/88405430/4427ef32-d8d0-4988-8cc6-d855cdc1d5d1"  width="200">
   &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="https://github.com/deepak20001/news_api_app/assets/88405430/65f0cbdc-a808-4e44-8316-31ac06a87d18"  width="200">
+  &nbsp;&nbsp;&nbsp;&nbsp;<br><br>
   <img src="https://github.com/deepak20001/news_api_app/assets/88405430/94eaebe1-c41f-4f15-93ef-ee5b737ce42f"  width="200">
   &nbsp;&nbsp;&nbsp;&nbsp;
   <img src="https://github.com/deepak20001/news_api_app/assets/88405430/7eea1f31-e6ba-451d-9605-49c842a358ad"  width="200">
