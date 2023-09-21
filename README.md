@@ -11,7 +11,7 @@ The Simple News App is your gateway to staying informed and up-to-date with the 
   <img src="https://github.com/deepak20001/news_api_app/assets/88405430/4427ef32-d8d0-4988-8cc6-d855cdc1d5d1"  width="200">
   &nbsp;&nbsp;&nbsp;&nbsp;
   <img src="https://github.com/deepak20001/news_api_app/assets/88405430/65f0cbdc-a808-4e44-8316-31ac06a87d18"  width="200">
-  &nbsp;&nbsp;&nbsp;&nbsp;<br><br>
+  &nbsp;&nbsp;&nbsp;&nbsp;
   <img src="https://github.com/deepak20001/news_api_app/assets/88405430/94eaebe1-c41f-4f15-93ef-ee5b737ce42f"  width="200">
   &nbsp;&nbsp;&nbsp;&nbsp;
   <img src="https://github.com/deepak20001/news_api_app/assets/88405430/7eea1f31-e6ba-451d-9605-49c842a358ad"  width="200">
